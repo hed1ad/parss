@@ -15,8 +15,8 @@ headers={
 
 req= requests.get(url,headers=headers)
 src= req.text
-#print(src)
 
+# Сохраняем html файл на случай ,если не будет доступа
 with open("index.html","w",encoding="utf-8") as file:
     src = file.write(src)
 
@@ -24,12 +24,13 @@ with open('index.html') as file:
     src= file.read()
 
 soup= BeautifulSoup(src, "lxml")
+#Фильтруем поиск
 lineups= soup.find_all(class_='playerstats lineups table')
 for item in lineups:
     item_text= item.text
     print (f"{item_text}")
 
-
+#Выводим результат
 file = open('res.txt', 'w', encoding='utf-8')
 file.write(item_text)
 
